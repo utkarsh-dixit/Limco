@@ -1,0 +1,13 @@
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- drawable/menu.xml -->
+    <item android:right="10dp">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="20dp"
+    android:width="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+    <path android:fillColor="#2b2929" android:pathData="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+</vector>
+</item>
+    </layer-list>

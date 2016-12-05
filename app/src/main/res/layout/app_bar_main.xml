@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tool_bar"
+        android:baselineAlignBottom="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/homebackground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Complain Portal"
+        android:id="@+id/ICSEText"
+        android:layout_marginTop="92dp"
+        android:layout_below="@+id/tool_bar"
+        android:layout_alignParentEnd="false"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="CITIZEN FORUM"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/ICSEText"
+        android:layout_alignStart="@+id/ICSEText"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="32dp"
+        android:fontFamily="sans-serif" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Jaipur Development Authority (JDA)"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:layout_alignParentEnd="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Jaipur"
+        android:id="@+id/Jaipur"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:fontFamily="sans-serif"
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        android:layout_marginTop="4dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/Jaipur"
+        android:id="@+id/relativeLayout2">
+
+        <ImageButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/Complain"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/program_icon"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="35dp"
+            android:src="@drawable/calendar"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentLeft="false"
+            android:adjustViewBounds="false" />
+
+        <ImageButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/imageButton2"
+            android:background="@drawable/program_icon"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/about"
+            android:scaleType="center"
+            android:layout_alignTop="@+id/Complain"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="false" />
+
+        <ImageButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:id="@+id/imageButton3"
+            android:background="@drawable/program_icon"
+            android:src="@drawable/share"
+            android:layout_alignTop="@+id/imageButton2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Complain"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/imageButton2"
+            android:layout_alignStart="@+id/Complain"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="About"
+            android:id="@+id/textView6"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/imageButton2"
+            android:layout_alignEnd="@+id/imageButton2"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Share"
+            android:id="@+id/textView7"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/imageButton3"
+            android:layout_alignEnd="@+id/imageButton3"
+            android:layout_marginRight="11dp" />
+
+    </RelativeLayout>
+    </RelativeLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:elevation="4dp"
+
+    android:id="@+id/MainParent"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="VJDA"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:textColor="@color/menu_primary"
+        android:textSize="19dp"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:paddingTop="1.5dp"
+        android:paddingLeft="5dp" />
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:id ="@+id/notifications"
+    android:layout_height="wrap_content" android:src="@drawable/bell"
+    android:layout_alignParentEnd="false" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:gravity="right">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:gravity="right"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/relativeLayout">
+            <ImageView
+            android:layout_width="wrap_content"
+            android:id ="@+id/Sort"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/magnify"
+
+
+                android:paddingRight="5dp"
+                android:layout_marginRight="10dp" />
+
+    </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id ="@+id/search_button"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/sort_variant"
+
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/relativeLayout"
+                android:layout_marginEnd="22dp" />
+        </RelativeLayout>
+</android.support.v7.widget.Toolbar>
