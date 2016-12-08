@@ -9,11 +9,14 @@ public class ItemData {
     private String title;
     private String imageUrl;
     private String Problem;
-    public ItemData(String title, String imageUrl, String pb){
+    private String unique_id;
+    public ItemData(String title, String imageUrl, String pb,String unqiue_id){
 
         this.title = title;
         this.imageUrl = imageUrl;
         this.Problem  = pb;
+        this.unique_id  = unqiue_id;
+
     }
     public String getTitle(){
         return this.title;
@@ -22,5 +25,6 @@ public class ItemData {
         return this.imageUrl;
     }
     public String getProblemDescription(){ return this.Problem; }
+    public String returnUniqueId(){ return this.unique_id;}
     // getters & setters
 }

@@ -1,11 +1,9 @@
 package com.example.root.citizenforumapp;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,12 +18,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by root on 11/26/2016.
+ * Created to Handle Complain Fragment
+ * Ask the server to send JSON for the query specified and then set the recycler view
+ * to show the complaints
  */
 public class Complain extends Fragment {
     ArrayList<HashMap<String, String>> jsonData = new ArrayList<HashMap<String, String>>();
@@ -53,10 +48,8 @@ public class Complain extends Fragment {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
-            String url = "http://192.168.1.103:8080/server_side/interactor.php?page=0";
+            String url = "http://192.168.1.103:8080/server_side/interactor.php?page=0"; // Specify the url
             String jsonStr = sh.makeServiceCall(url);
-
-            Log.e("THIS IS RESPONSE", "Response from url: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONArray jsonObj = null;
@@ -114,7 +107,7 @@ public class Complain extends Fragment {
                     String problem_details = jsonData.get(i).get("problem_details");
                     String photo = jsonData.get(i).get("location_photo");
                     String unique_id = jsonData.get(i).get("unique_id");
-                    dat.add(new ItemData("Test",photo,problem_details));
+                    dat.add(new ItemData("Test",photo,problem_details,unique_id));
             }
             // 3. create an adapter
             MyAdapter mAdapter = new MyAdapter(dat);
@@ -157,13 +150,7 @@ public class Complain extends Fragment {
             }
         });
         // this is data fro recycler view
-        ItemData itemsData[] = {
-                new ItemData("Illegal Construction","http://www.udaipurtimes.com/wp-content/uploads/2013/08/illegal-construction.jpg","Lorem ipsum dolor sit amet, eu sumo liber est, mentitum voluptaria mea ut. Officiis invidunt menandri nam eu, duo euismod mentitum an. Ne brute habemus nusquam sit. His justo dicunt omnium cu, usu etiam velit ea, ...."),
-                new ItemData("Lease Issue","http://www.udaipurtimes.com/wp-content/uploads/2013/08/illegal-construction.jpg","Lorem ipsum dolor sit amet, eu sumo liber est, mentitum voluptaria mea ut. Officiis invidunt menandri nam eu, duo euismod mentitum an. Ne brute habemus nusquam sit. His justo dicunt omnium cu, usu etiam velit ea, ...."),
-                new ItemData("Some Problem","http://www.udaipurtimes.com/wp-content/uploads/2013/08/illegal-construction.jpg","Lorem ipsum dolor sit amet, eu sumo liber est, mentitum voluptaria mea ut. Officiis invidunt menandri nam eu, duo euismod mentitum an. Ne brute habemus nusquam sit. His justo dicunt omnium cu, usu etiam velit ea, ...."),
-                new ItemData("Bla Bla Bla","http://www.udaipurtimes.com/wp-content/uploads/2013/08/illegal-construction.jpg","Lorem ipsum dolor sit amet, eu sumo liber est, mentitum voluptaria mea ut. Officiis invidunt menandri nam eu, duo euismod mentitum an. Ne brute habemus nusquam sit. His justo dicunt omnium cu, usu etiam velit ea, ...."),
-                new ItemData("Illegal Construction","http://www.udaipurtimes.com/wp-content/uploads/2013/08/illegal-construction.jpg","Lorem ipsum dolor sit amet, eu sumo liber est, mentitum voluptaria mea ut. Officiis invidunt menandri nam eu, duo euismod mentitum an. Ne brute habemus nusquam sit. His justo dicunt omnium cu, usu etiam velit ea, ...."),
-        };
+
         new StartMain(l).execute();
 
         return l;

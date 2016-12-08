@@ -17,12 +17,13 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
 /**
- * Created by hudixt on 11/28/2016.
+ * Adapter for RecyclerView
+ * Handles all the cardViews that are shown in the complaint section.
+ * Remember to assign unique_id to the posts for click handling.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<ItemData> itemsData;
@@ -33,11 +34,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public MyAdapter.ViewHolder onCreateViewHolder( ViewGroup parent,
                                                    int viewType) {
+
         // create a new view
-        View itemLayoutView = LayoutInflater.from(parent.getContext())
+        final View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.forumcard, null,true);
+        final Context pContext = parent.getContext();
+
+        itemLayoutView.findViewById(R.id.mainCard).setOnClickListener(new View.OnClickListener() {
+                                                                          @Override
+                                                                          public void onClick(View view) {
+                                                                              String unq_id = view.getTag().toString();
+
+                                                                          }
+                                                                      });
         WindowManager windowManager = (WindowManager)itemLayoutView.getContext().getSystemService(Context.WINDOW_SERVICE);
         int width = windowManager.getDefaultDisplay().getWidth();
         itemLayoutView.setLayoutParams(new RecyclerView.LayoutParams(width, RecyclerView.LayoutParams.MATCH_PARENT));
@@ -91,6 +102,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             return null;
         }
     }
+    private  String ResizeString(String main){
+        int offSet = 200;
+        if(main.length()>200){
+            main = main.substring(0,offSet)  + "...";
+        }
+        return main;
+    }
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
@@ -98,7 +116,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that itemsData
 
         viewHolder.txtViewTitle.setText(itemsData.get(position).getTitle());
-        viewHolder.problem_desc.setText(itemsData.get(position).getProblemDescription());
+        String problemDescription = itemsData.get(position).getProblemDescription();
+        viewHolder.problem_desc.setText(ResizeString(itemsData.get(position).getProblemDescription()));
+        try{
+             viewHolder.itemView.setTag(itemsData.get(position).returnUniqueId());
+        }
+        catch(NullPointerException ignored){
+
+        }
        // viewHolder.imgViewIcon.setImageBitmap(getBitmapFromURL("http://patrickcoombe.com/wp-content/uploads/2015/09/new-google-logo-2015.png"));
         new DownloadImageTask((ImageView) viewHolder.imgViewIcon,(ProgressBar) viewHolder.pb)
              .execute(itemsData.get(position).getImageUrl());
@@ -119,6 +144,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             imgViewIcon = (ImageView) itemLayoutView.findViewById(R.id.locationImage);
             pb = (ProgressBar)  itemLayoutView.findViewById(R.id.ImageLoading);
             problem_desc = (TextView) itemLayoutView.findViewById(R.id.problem_desc);
+
         }
     }
 
