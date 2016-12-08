@@ -32,7 +32,7 @@ import java.util.List;
  * Created by root on 11/26/2016.
  */
 public class Complain extends Fragment {
-    ArrayList<HashMap<String, String>> jsonData;
+    ArrayList<HashMap<String, String>> jsonData = new ArrayList<HashMap<String, String>>();
     private class StartMain extends AsyncTask<Void, Void, Void> {
         public View lV = null;
 
@@ -53,27 +53,27 @@ public class Complain extends Fragment {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
-            String url = "http://192.168.1.100:8080/server_side/interactor.php?page=0";
+            String url = "http://192.168.1.103:8080/server_side/interactor.php?page=0";
             String jsonStr = sh.makeServiceCall(url);
 
             Log.e("THIS IS RESPONSE", "Response from url: " + jsonStr);
             if (jsonStr != null) {
                 try {
-                    JSONObject jsonObj = null;
+                    JSONArray jsonObj = null;
                     try {
-                        jsonObj = new JSONObject(jsonStr);
+                        jsonObj = new JSONArray(jsonStr);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                     // Getting JSON Array node
 
-
+                    Log.e("Check it",jsonObj.length() + "");
                     // looping through All Contacts
                     for (int i = 0; i < jsonObj.length(); i++) {
-                        JSONObject c = jsonObj.getJSONObject(i+"");
+                        JSONObject c = jsonObj.getJSONObject(i);
 
-                        String unique_id = c.getString("unqiue_id");
+                        String unique_id = c.getString("unique_id");
                         String problem_details = c.getString("problem_details");
                         String location_photo = c.getString("location_photo");
 
@@ -83,7 +83,7 @@ public class Complain extends Fragment {
                         HashMap<String, String> contact = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        contact.put("unqiue_id", unique_id);
+                        contact.put("unique_id", unique_id);
                         contact.put("problem_details", problem_details);
                         contact.put("location_photo", location_photo);
 
