@@ -3,6 +3,7 @@ package com.example.root.citizenforumapp;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 /**
  * Created to Handle Complain Fragment
  * Ask the server to send JSON for the query specified and then set the recycler view
@@ -28,11 +30,76 @@ import java.util.List;
  */
 public class Complain extends Fragment {
     ArrayList<HashMap<String, String>> jsonData = new ArrayList<HashMap<String, String>>();
+    String prefix = "http://192.168.42.81:80/server_side/";
+    private class GetCategories extends AsyncTask<Void,Void,Void>{
+        private TabLayout rootTab;
+        private View mainView;
+        private Complain given;
+        public GetCategories(View l,TabLayout root,Complain cmp){this.mainView = l; this.rootTab = root;this.given = cmp;}
+        @Override
+        protected  void onPreExecute(){
+            super.onPreExecute();
+            //Toast.makeText(mainView.getContext(),"Downloading Categories List",Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+            // Making a request to url and getting response
+            String url = prefix+"categories.php"; // Specify the url
+            String jsonStr = sh.makeServiceCall(url);
+            if (jsonStr != null) {
+                try {
+                    JSONArray jsonObj = null;
+                    try {
+                        jsonObj = new JSONArray(jsonStr);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int i = 0; i < jsonObj.length(); i++) {
+                        JSONObject c = jsonObj.getJSONObject(i);
+                        String category_id = c.getString("category_id");
+                        String category_name = c.getString("category_name");
+                      given.AddaTab(rootTab,category_name,category_id);
+                    }
+                } catch (final JSONException e) {
+                    Log.e("SAMPLE", "Json parsing error: " + e.getMessage());
+                }
+
+            } else {
+                Log.e("Sorry", "Couldn't get json from server.");
+
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result){
+            super.onPostExecute(result);
+            //Toast.makeText(mainView.getContext(),"Categories Downloaded",Toast.LENGTH_SHORT).show();
+
+
+        }
+    }
+    public void AddaTab(final TabLayout m, final String category_name, final String category_id){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TabLayout.Tab t = m.newTab();
+                t.setText(category_name);
+                t.setTag(category_id);
+              //  Toast.makeText(m.getContext(),category_name,Toast.LENGTH_SHORT);
+                m.addTab(t);
+            }
+        });
+
+        return;
+    }
     private class StartMain extends AsyncTask<Void, Void, Void> {
         public View lV = null;
-
-        public StartMain(View l) {
-            this.lV = l;
+        public String url = "";
+        public StartMain(View l,String url) {
+            this.lV = l; this.url = url;
         }
 
 
@@ -40,7 +107,9 @@ public class Complain extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(lV.getContext(),"Json Data is downloading",Toast.LENGTH_LONG).show();
+            jsonData.clear();
+
+          //  Toast.makeText(lV.getContext(),"Json Data is downloading",Toast.LENGTH_LONG).show();
 
         }
 
@@ -48,7 +117,6 @@ public class Complain extends Fragment {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
-            String url = "http://192.168.1.103:8080/server_side/interactor.php?page=0"; // Specify the url
             String jsonStr = sh.makeServiceCall(url);
             if (jsonStr != null) {
                 try {
@@ -111,17 +179,50 @@ public class Complain extends Fragment {
             }
             // 3. create an adapter
             MyAdapter mAdapter = new MyAdapter(dat);
+
+            mAdapter.mang = getFragmentManager();
             // 4. set adapter
             RecyclerView  rv = (RecyclerView) lV.findViewById(R.id.rv);
             rv.setAdapter(mAdapter);
+
         }
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View l = inflater.inflate(R.layout.complain, container, false);
+        final View l = inflater.inflate(R.layout.complain, container, false);
+        final TabLayout ctrl = (TabLayout)  l.findViewById(R.id.TabCtrl);
+        final Complain m = this;
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                new GetCategories(l,ctrl,m).execute();
+            }
+        });
+        ctrl.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
+            @Override
+            public void onTabSelected(final TabLayout.Tab tab)
+            {
 
-       RecyclerView  rv = (RecyclerView) l.findViewById(R.id.rv);
+                        new StartMain(l, prefix + "interactor.php?page=0&cat=" + tab.getTag().toString()).execute();
+
+                // Toast.makeText(l.getContext(),tab.getTag()+"",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab)
+            {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab)
+            {
+
+            }
+        });
+        RecyclerView  rv = (RecyclerView) l.findViewById(R.id.rv);
+
         rv.setHasFixedSize(true);
 
         // 2. set layoutManger
@@ -149,9 +250,10 @@ public class Complain extends Fragment {
                 transaction.commit();
             }
         });
+
         // this is data fro recycler view
 
-        new StartMain(l).execute();
+        new StartMain(l,prefix+"interactor.php?page=0").execute();
 
         return l;
     }

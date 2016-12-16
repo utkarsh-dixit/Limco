@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +30,7 @@ import java.util.List;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<ItemData> itemsData;
-
+    public FragmentManager mang;
     public MyAdapter(List<ItemData> itemsData) {
         this.itemsData = itemsData;
     }
@@ -46,7 +49,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                                                           @Override
                                                                           public void onClick(View view) {
                                                                               String unq_id = view.getTag().toString();
+                                                                              // Click action
+                                                                              // Create fragment and give it an argument specifying the article it should show
+                                                                              ComplaintDetails newFragment = new ComplaintDetails();
 
+                                                                              Bundle args = new Bundle();
+
+                                                                              newFragment.setArguments(args);
+
+                                                                              FragmentTransaction transaction = mang.beginTransaction();
+                                                                              transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+                                                                              transaction.replace(R.id.fragment_container, newFragment);
+                                                                              transaction.addToBackStack(null);
+
+// Commit the transaction
+                                                                              transaction.commit();
                                                                           }
                                                                       });
         WindowManager windowManager = (WindowManager)itemLayoutView.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -147,11 +166,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         }
     }
+    public void clearData() {
+        int size = this.itemsData.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                this.itemsData.remove(0);
+            }
 
+            this.notifyItemRangeRemoved(0, size);
+        }
+    }
 
     // Return the size of your itemsData (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return itemsData.size();
     }
+
 }

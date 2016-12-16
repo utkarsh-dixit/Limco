@@ -1,18 +1,14 @@
 package com.example.root.citizenforumapp;
 
-import android.app.ActionBar;
-import android.media.Image;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        android.content.SharedPreferences  SharedPreferences = getSharedPreferences("LIMCO", Context.MODE_PRIVATE);
+        boolean check = SharedPreferences.getBoolean("is_login", false);
+        if(!check){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
