@@ -1,8 +1,11 @@
 package com.example.root.citizenforumapp;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.com.simplepass.loading_button_lib.CircularProgressButton;
+
 /**
  * Created by root on 12/13/2016.
  */
@@ -22,13 +27,17 @@ public class LoginActivity extends AppCompatActivity  {
 
     public static android.content.SharedPreferences SharedPreferences = null;
     private Context appContext;
-    private String host = "http://192.168.42.81:80/server_side/";
+    private String host = "https://himanshudixit.me/server_side/";
 
     private class CheckCredentials extends AsyncTask<Void,Void,Void>{
         private String  user_name;
         private String user_pass;
+        private CircularProgressButton pa;
+        public CheckCredentials(String user_name, String user_pass, CircularProgressButton p){
+            this.user_name = user_name; this.user_pass= user_pass; this.pa = p;
+        }
 
-        public CheckCredentials(String user_name, String user_pass){this.user_name = user_name; this.user_pass= user_pass;}
+
         @Override
         protected  void onPreExecute(){
             super.onPreExecute();
@@ -74,6 +83,7 @@ public class LoginActivity extends AppCompatActivity  {
                                         public void run() {
                                             Intent intent = new Intent(appContext, MainActivity.class);
                                             startActivity(intent);
+                                            finish();
                                         }
                                     });
 
@@ -83,6 +93,26 @@ public class LoginActivity extends AppCompatActivity  {
 
                             } else {
                                 Toast.makeText(appContext, "Wrong Credentials", Toast.LENGTH_LONG).show();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Button sgn = (Button) findViewById(R.id.signUp);
+                                        MorphingButton.Params square = MorphingButton.Params.create()
+                                                .duration(300)
+                                                .cornerRadius(0)
+                                                .text("SIGN IN")
+                                                .width(sgn.getWidth())
+                                                .height(sgn.getHeight())
+                                                .color(Color.parseColor("#730dd6"));
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                pa.revertAnimation();
+                                            }
+                                        });
+
+                                    }
+                                });
                             }
                         }
 
@@ -108,6 +138,7 @@ public class LoginActivity extends AppCompatActivity  {
 
         }
     }
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,17 +162,25 @@ public class LoginActivity extends AppCompatActivity  {
                 Toast.makeText(appContext,"The product is in beta testing. So Sign Up is disabled.",Toast.LENGTH_LONG).show();
             }
         });
-        Button lgn_button = (Button) findViewById(R.id.signIn);
+
         final EditText user = (EditText) findViewById(R.id.username);
         final EditText user_pass = (EditText) findViewById(R.id.password);
-        lgn_button.setOnClickListener(new View.OnClickListener(){
+        final CircularProgressButton btn = (CircularProgressButton) findViewById(R.id.sngBtn);
+        btn.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void onClick(View v){
-                //new CheckCredentials(user.getText().toString(),user_pass.getText().toString()).execute();
-                new CheckCredentials(user.getText().toString(),user_pass.getText().toString()).execute();
-               // DoLogin(user.getText().toString(),user_pass.getText().toString());
+            public void onClick(View view) {
+                btn.destroyDrawingCache();
+
+                btn.startAnimation();
+                new CheckCredentials(user.getText().toString(),user_pass.getText().toString(),btn).execute();
+
             }
         });
+
+              //
+
+
     }
 
 

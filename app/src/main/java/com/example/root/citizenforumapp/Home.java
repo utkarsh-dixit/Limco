@@ -39,8 +39,28 @@ public class Home extends Fragment {
                 transaction.commit();
             }
         });
+        ImageButton cmp1 = (ImageButton) main.findViewById(R.id.imageButton2);
+        cmp1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create fragment and give it an argument specifying the article it should show
+                About newFragment = new About();
+                Bundle args = new Bundle();
 
+                newFragment.setArguments(args);
 
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+                transaction.replace(R.id.fragment_container, newFragment);
+                transaction.addToBackStack(null);
+
+// Commit the transaction
+                transaction.commit();
+            }
+        });
         return main;
     }
 }

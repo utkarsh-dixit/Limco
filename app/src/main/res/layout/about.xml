@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="5dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_layout"
+    <ImageView
+        android:layout_width="wrap_content"
+        app:srcCompat="@drawable/lego"
+        android:id="@+id/imageView3"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:text="LIMCO is a Citizen Protal Forum App which helps the citizens to raise their voice to the civic authorities about the illegal things that needs to be fixed on local level. It is actually part of JDA. This app allows the citiznes to submit their problems to the civic authorities and also have a look at other problems posted by other people. THis app currently is under  developemnt and this is the reason why it doesn't have much features yet.... IN PROGRESS"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="UserName"/>
-    </android.support.design.widget.TextInputLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textView4"
+        android:layout_below="@id/imageView3"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

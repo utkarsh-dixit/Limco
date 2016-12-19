@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
+
 /**
  * Created to Handle Complain Fragment
  * Ask the server to send JSON for the query specified and then set the recycler view
@@ -30,7 +31,7 @@ import java.util.List;
  */
 public class Complain extends Fragment {
     ArrayList<HashMap<String, String>> jsonData = new ArrayList<HashMap<String, String>>();
-    String prefix = "http://192.168.42.81:80/server_side/";
+    String prefix = "https://himanshudixit.me/server_side/";
     private class GetCategories extends AsyncTask<Void,Void,Void>{
         private TabLayout rootTab;
         private View mainView;
@@ -47,6 +48,7 @@ public class Complain extends Fragment {
             // Making a request to url and getting response
             String url = prefix+"categories.php"; // Specify the url
             String jsonStr = sh.makeServiceCall(url);
+            Log.e("my",jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONArray jsonObj = null;
@@ -137,7 +139,7 @@ public class Complain extends Fragment {
                         String unique_id = c.getString("unique_id");
                         String problem_details = c.getString("problem_details");
                         String location_photo = c.getString("location_photo");
-
+                        String problemTitle = c.getString("Problem_Title");
 
 
                         // tmp hash map for single contact
@@ -147,7 +149,7 @@ public class Complain extends Fragment {
                         contact.put("unique_id", unique_id);
                         contact.put("problem_details", problem_details);
                         contact.put("location_photo", location_photo);
-
+                        contact.put("problemTitle",problemTitle);
 
                         // adding contact to contact list
                         jsonData.add(contact);
@@ -175,7 +177,8 @@ public class Complain extends Fragment {
                     String problem_details = jsonData.get(i).get("problem_details");
                     String photo = jsonData.get(i).get("location_photo");
                     String unique_id = jsonData.get(i).get("unique_id");
-                    dat.add(new ItemData("Test",photo,problem_details,unique_id));
+                    String tle = jsonData.get(i).get("problemTitle");
+                    dat.add(new ItemData(tle,photo,problem_details,unique_id));
             }
             // 3. create an adapter
             MyAdapter mAdapter = new MyAdapter(dat);

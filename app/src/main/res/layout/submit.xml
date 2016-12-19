@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent" android:layout_height="wrap_content"
     android:orientation="vertical">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -27,14 +30,67 @@
         android:layout_alignParentRight="false"
         android:layout_alignWithParentIfMissing="false"
         android:layout_alignParentTop="false"
-        android:layout_alignRight="@+id/coverPhoto"
+
         android:layout_alignBottom="@+id/mainL"
         android:layout_margin="10dp" />
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
+        android:text="Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainL"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView8"
+        android:layout_marginTop="17dp"
+        android:textStyle="normal|bold"
+        android:padding="10dp" />
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/title">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Title"
+            android:padding="10dp"
+            android:id="@+id/tle" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="wrap_content"             android:layout_marginTop="32dp"     android:layout_below="@+id/title"  android:padding="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="150dip">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cmt"
+                android:hint="Description" />
+        </android.support.design.widget.TextInputLayout>
+
+    </ScrollView>
+
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ScrollView01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:id="@+id/sbm" />
+
 
 </RelativeLayout>
+</ScrollView>

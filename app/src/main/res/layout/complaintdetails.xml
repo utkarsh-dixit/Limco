@@ -84,11 +84,46 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/mainCard">
 
-        <TextView
-            android:text="Hese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\nHese\n"
+        <TextView android:text="Comments"
+            android:layout_width="357dp" android:layout_height="match_parent"
+           android:typeface="serif"
+            android:layout_marginLeft="7dp"></TextView>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView10" />
+            android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView android:layout_width="match_parent"
+            android:layout_height="139dp"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+            card_view:contentPadding="16dp"
+            card_view:cardElevation="7dp"
+
+            card_view:cardUseCompatPadding="true"
+
+            card_view:cardBackgroundColor="@android:color/white"
+            android:showDividers="beginning"
+            android:id="@+id/firstComment"
+            >
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView android:layout_width="match_parent"
+                android:layout_height="139dp"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+                card_view:contentPadding="16dp"
+                card_view:cardElevation="7dp"
+
+                card_view:cardUseCompatPadding="true"
+android:layout_below="@id/firstComment"
+                card_view:cardBackgroundColor="@android:color/white"
+                android:showDividers="beginning"
+
+                >
+
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
