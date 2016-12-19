@@ -107,21 +107,6 @@
             >
 
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView android:layout_width="match_parent"
-                android:layout_height="139dp"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-
-                card_view:contentPadding="16dp"
-                card_view:cardElevation="7dp"
-
-                card_view:cardUseCompatPadding="true"
-android:layout_below="@id/firstComment"
-                card_view:cardBackgroundColor="@android:color/white"
-                android:showDividers="beginning"
-
-                >
-
-            </android.support.v7.widget.CardView>
         </RelativeLayout>
 
     </LinearLayout>

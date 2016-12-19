@@ -1,5 +1,8 @@
 package com.example.root.citizenforumapp;
 
+import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -59,6 +62,15 @@ public class Home extends Fragment {
 
 // Commit the transaction
                 transaction.commit();
+            }
+        });
+        ImageButton Share = (ImageButton) main.findViewById(R.id.share);
+        Share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.facebook.com/sharer/sharer.php?u=http%3A//lego.citizenforum.com"));
+                startActivity(intent);
             }
         });
         return main;

@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,6 +50,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                                                           @Override
                                                                           public void onClick(View view) {
                                                                               String unq_id = view.getTag().toString();
+
+                                                                              Toast.makeText(pContext,unq_id,Toast.LENGTH_LONG).show();
+                                                                              /*
                                                                               // Click action
                                                                               // Create fragment and give it an argument specifying the article it should show
                                                                               ComplaintDetails newFragment = new ComplaintDetails();
@@ -66,6 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 // Commit the transaction
                                                                               transaction.commit();
+                                                                              */
                                                                           }
                                                                       });
         WindowManager windowManager = (WindowManager)itemLayoutView.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -139,6 +144,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.problem_desc.setText(ResizeString(itemsData.get(position).getProblemDescription()));
         try{
              viewHolder.itemView.setTag(itemsData.get(position).returnUniqueId());
+
         }
         catch(NullPointerException ignored){
 

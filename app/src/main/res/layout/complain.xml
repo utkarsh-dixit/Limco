@@ -30,7 +30,8 @@
         android:layout_gravity="bottom"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="false"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        card_view:srcCompat="@drawable/plus" />
 
     <LinearLayout
 

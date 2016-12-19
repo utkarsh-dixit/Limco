@@ -31,19 +31,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="CITIZEN FORUM"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/ICSEText"
-        android:layout_alignStart="@+id/ICSEText"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:textSize="32dp"
-        android:fontFamily="sans-serif" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Jaipur Development Authority (JDA)"
         android:id="@+id/textView3"
@@ -104,7 +91,7 @@
         <ImageButton
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:id="@+id/imageButton3"
+            android:id="@+id/share"
             android:background="@drawable/program_icon"
             android:src="@drawable/share"
             android:layout_alignTop="@+id/imageButton2"
@@ -139,9 +126,22 @@
             android:text="Share"
             android:id="@+id/textView7"
             android:textColor="#ffffff"
-            android:layout_below="@+id/imageButton3"
-            android:layout_alignEnd="@+id/imageButton3"
+            android:layout_below="@+id/share"
+            android:layout_alignEnd="@+id/share"
             android:layout_marginRight="11dp" />
 
     </RelativeLayout>
-    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="LEGO CITIZEN FORUM"
+        android:id="@+id/textView2"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="32dp"
+        android:fontFamily="sans-serif"
+        android:layout_below="@+id/ICSEText"
+        android:layout_alignStart="@+id/ICSEText" />
+</RelativeLayout>

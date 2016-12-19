@@ -250,7 +250,7 @@ public class Submit extends Fragment {
                 BitmapDrawable drawable = (BitmapDrawable) img.getDrawable();
                 Bitmap bmap = drawable.getBitmap();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                bmap.compress(Bitmap.CompressFormat.JPEG, 45, baos); //bm is the bitmap object
                 byte[] b = baos.toByteArray();
                 String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
                // Toast.makeText(l.getContext(),"Submitted",Toast.LENGTH_LONG).show();
