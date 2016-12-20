@@ -57,9 +57,14 @@ public class LoginActivity extends AppCompatActivity  {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    final Boolean is_login;
+                    if(jsonObj==null){
+                        is_login = false;
+                    }
+                    else{
+                        is_login = jsonObj.getBoolean("is_login");
+                    }
 
-
-                    final Boolean is_login = jsonObj.getBoolean("is_login");
 
                     final JSONObject finalJsonObj = jsonObj;
                     runOnUiThread(new Runnable() {
@@ -93,6 +98,7 @@ public class LoginActivity extends AppCompatActivity  {
 
                             } else {
                                 Toast.makeText(appContext, "Wrong Credentials", Toast.LENGTH_LONG).show();
+
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -144,7 +150,10 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         SharedPreferences = getSharedPreferences("LIMCO", Context.MODE_PRIVATE);
-        boolean check = SharedPreferences.getBoolean("is_login", false);
+        boolean check = false;
+
+     check = SharedPreferences.getBoolean("is_login", false);
+
         if(check){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
