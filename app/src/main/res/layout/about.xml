@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="LEGO(Let it Go) is a Citizen Protal Forum App which helps the citizens to raise their voice to the civic authorities about the illegal things that needs to be fixed on local level. It is actually part of JDA. This app allows the citiznes to submit their problems to the civic authorities and also have a look at other problems posted by other people. THis app currently is under  developemnt and this is the reason why it doesn't have much features yet.... IN PROGRESS"
+        android:text="LIMCO(Listen My Complains) is a Citizen Protal Forum App which helps the citizens to raise their voice to the civic authorities about the illegal things that needs to be fixed on local level. It is actually part of JDA. This app allows the citiznes to submit their problems to the civic authorities and also have a look at other problems posted by other people. THis app currently is under  developemnt and this is the reason why it doesn't have much features yet.... IN PROGRESS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
