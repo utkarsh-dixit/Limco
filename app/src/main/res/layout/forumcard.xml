@@ -1,7 +1,6 @@
 <android.support.v7.widget.CardView android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     card_view:contentPadding="16dp"
     card_view:cardElevation="7dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
